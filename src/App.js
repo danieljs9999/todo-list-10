@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { useReducer, useState, useEffect } from "react";
+import styled from "styled-components";
+import "./App.css";
+import Form from "./components/form/Form";
+import TodoList from "./components/todoList/TodoList";
+import reducer from "./components/reducer";
 
 function App() {
+  const [todo, dispatch] = useReducer(
+    reducer,
+    // [
+    //   { title: "Finish the essay collaboration", id: 5423, isCompleted: false },
+    //   { title: "Read next chapter of the book", id: 43543, isCompleted: false },
+    // ]
+    JSON.parse(localStorage.getItem("todo"))
+  );
+  const [todosValue, setTodosValue] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem("todo", JSON.stringify(todo));
+  }, [todo]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <H1>Todo List</H1>
+      <Form
+        dispatch={dispatch}
+        todo={todo}
+        todosValue={todosValue}
+        setTodosValue={setTodosValue}
+      />
+      <TodoList dispatch={dispatch} todo={todo} setTodosValue={setTodosValue} />
+    </>
   );
 }
 
 export default App;
+
+const H1 = styled.h1`
+  color: white;
+  font-size: 4rem;
+`;
