@@ -6,19 +6,11 @@ import TodoList from "./components/todoList/TodoList";
 import reducer from "./components/reducer";
 
 function App() {
-  const [todo, dispatch] = useReducer(
-    reducer,
-    // [
-    //   { title: "Finish the essay collaboration", id: 5423, isCompleted: false },
-    //   { title: "Read next chapter of the book", id: 43543, isCompleted: false },
-    // ]
-    JSON.parse(localStorage.getItem("todo"))
-  );
+  const [todo, dispatch] = useReducer(reducer, [
+    { title: "Finish the essay collaboration", id: 5423, isCompleted: false },
+    { title: "Read next chapter of the book", id: 43543, isCompleted: false },
+  ]);
   const [todosValue, setTodosValue] = useState("");
-
-  useEffect(() => {
-    localStorage.setItem("todo", JSON.stringify(todo));
-  }, [todo]);
 
   return (
     <>
