@@ -1,19 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { GlobalContext } from "../../store/TodoContext";
 import Button from "../UI/button/Button";
 import Input from "../UI/input/Input";
 
-function Form({ setTodosValue, dispatch, todosValue }) {
+function Form() {
+  const { dispatch, setTodosValue, todosValue } = useContext(GlobalContext);
+
   const enebled = todosValue.trim().length > 0;
 
   const todoHandler = (event) => {
-    
     const newTodo = {
       title: todosValue,
       id: Math.random().toString(),
       isCompleted: false,
     };
+
     dispatch({ type: "add", payload: newTodo });
+
     setTodosValue("");
     event.preventDefault();
   };

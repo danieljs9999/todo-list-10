@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { BsCheck, BsTrash } from "react-icons/bs";
 import { BiEditAlt } from "react-icons/bi";
+import { GlobalContext } from "../../store/TodoContext";
 
-function TodoItem({ dispatch, element, id, setTodosValue }) {
+function TodoItem({ element }) {
+  const { dispatch, setTodosValue } = useContext(GlobalContext);
+
   const toggleTodo = (id) => {
     dispatch({ type: "toggle", payload: id });
   };
@@ -18,7 +21,7 @@ function TodoItem({ dispatch, element, id, setTodosValue }) {
   };
 
   return (
-    <LiList key={id}>
+    <LiList key={element.id}>
       <Conteiner onClick={() => toggleTodo(element.id)}>
         <InputCheckbox
           className={`${element.isCompleted ? "isCompleted" : " "}`}

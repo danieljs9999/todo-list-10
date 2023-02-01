@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import TodoItem from "./TodoItem";
 import styled from "styled-components";
+import { GlobalContext } from "../../store/TodoContext";
 
-function TodoList({ todo, dispatch, setTodosValue }) {
+function TodoList() {
+  const { todo } = useContext(GlobalContext);
+
   return (
     <UlList>
       {todo.map((element) => {
-        return <TodoItem element={element} key={element.id} dispatch={dispatch} setTodosValue={setTodosValue} />;
+        return <TodoItem element={element} key={element.id} />;
       })}
     </UlList>
   );

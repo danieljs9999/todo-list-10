@@ -1,28 +1,15 @@
-import { useReducer, useState, useEffect } from "react";
 import styled from "styled-components";
-import "./App.css";
 import Form from "./components/form/Form";
 import TodoList from "./components/todoList/TodoList";
-import reducer from "./components/reducer";
+import { ContextConteiner } from "./store/TodoContext";
 
 function App() {
-  const [todo, dispatch] = useReducer(reducer, [
-    { title: "Finish the essay collaboration", id: 5423, isCompleted: false },
-    { title: "Read next chapter of the book", id: 43543, isCompleted: false },
-  ]);
-  const [todosValue, setTodosValue] = useState("");
-
   return (
-    <>
+    <ContextConteiner>
       <H1>Todo List</H1>
-      <Form
-        dispatch={dispatch}
-        todo={todo}
-        todosValue={todosValue}
-        setTodosValue={setTodosValue}
-      />
-      <TodoList dispatch={dispatch} todo={todo} setTodosValue={setTodosValue} />
-    </>
+      <Form />
+      <TodoList />
+    </ContextConteiner>
   );
 }
 
